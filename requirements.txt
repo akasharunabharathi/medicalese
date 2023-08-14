@@ -1,0 +1,9 @@
+torch
+torchvision
+torchaudio
+transformers
+pytest
+pylint
+black
+fastapi
+uvicorn
