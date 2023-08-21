@@ -4,6 +4,8 @@ torchaudio
 transformers
 pytest
 pylint
+pytesseract
 black
 fastapi
 uvicorn
+Pillow
