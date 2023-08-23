@@ -1,6 +1,6 @@
 install:
 	pip install --upgrade pip &&\
-		pip install -r requiremnets.txt
+		pip install -r requirements.txt
 
 test:
 	python -m pytest -vvv test_main.py
