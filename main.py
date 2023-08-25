@@ -1,7 +1,7 @@
 import ocr
 import models
 
-file_name = "Sample Report.png"
+file_name = "medicalese/Sample Report.png"
 
 if __name__ == "__main__":
     print(ocr.image_report(file_name))
