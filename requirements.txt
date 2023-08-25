@@ -3,6 +3,7 @@ torchvision
 torchaudio
 transformers
 langchain
+openai
 
 pytest
 pylint
