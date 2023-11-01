@@ -8,8 +8,6 @@ from decouple import config
 import os
 import ocr
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
-
 def bio_summarize(file_name: str):
     """
     Accepts a pdf file or an image as an input. Input is, additionally, a medical report. 
