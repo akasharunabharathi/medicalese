@@ -1,12 +1,14 @@
 """
 This module is responsible for handling user input and explaining their reports to them.
 """
-from langchain import HuggingFaceHub
-from langchain.chat_models import ChatOpenAI
-from langchain import PromptTemplate, LLMChain
+from langchain.llms import HuggingFaceHub
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
 from decouple import config
 import os
 import ocr
+
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
 
 def bio_summarize(file_name: str):
     """
@@ -14,7 +16,7 @@ def bio_summarize(file_name: str):
     This function reads the report, summairzes it for the user, and returns the summary.
     """
     llm = HuggingFaceHub(
-    repo_id ="google/pegasus-xsum",
+    repo_id ="Falconsai/medical_summarization",
     task = "summarization",
     model_kwargs = {"temperature": 0, "max_length": 1024},
     )
@@ -41,9 +43,27 @@ def bio_summarize(file_name: str):
         pass
     elif is_image_file:
         report = ocr.image_report(file_name)
-        prompt_template.format(report_string = report)
-        return llm_chain.run(report)
+        prompt = prompt_template.format(report_string = report)
+        report_summary = llm_chain.run(prompt)
+
+        return clean_formatter(report_summary)
     else:
         pass
 
     return None
+
+
+def clean_formatter(report_summary):
+  sentences = report_summary.split(".")
+  clean_report = ""
+  sentence_count = 0
+  for sentence in sentences:
+    sentence = sentence.strip()
+    if sentence != "":
+      new_sentence = sentence[0].upper() + sentence[1:] + "."
+      if sentence_count == 0:
+        clean_report += new_sentence
+      else:
+        clean_report += " " + new_sentence
+
+  return clean_report
