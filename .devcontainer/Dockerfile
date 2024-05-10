@@ -27,4 +27,4 @@ COPY ../ /app
 # CMD ["python3", "app.py"]
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 5000 34000

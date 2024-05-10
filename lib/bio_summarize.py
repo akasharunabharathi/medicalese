@@ -1,30 +1,32 @@
 """
 This module is responsible for handling user input and explaining their reports to them.
 """
-from langchain.llms import HuggingFaceHub
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from decouple import config
 import os
+import requests
+from decouple import config
+from langchain.prompts import PromptTemplate
+
 import ocr
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = config("HUGGINGFACEHUB_API_TOKEN")
+headers = {"Authorization": f"Bearer {os.environ['HUGGINGFACEHUB_API_TOKEN']}"}
+parameters = {"temperature": 0, "max_length": 1024}
+
+API_URL = "https://api-inference.huggingface.co/models/Falconsai/medical_summarization"
+
+
+def query_summarizer(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()
 
 def bio_summarize(file_name: str):
     """
     Accepts a pdf file or an image as an input. Input is, additionally, a medical report. 
     This function reads the report, summairzes it for the user, and returns the summary.
     """
-    llm = HuggingFaceHub(
-    repo_id ="Falconsai/medical_summarization",
-    task = "summarization",
-    model_kwargs = {"temperature": 0, "max_length": 1024},
-    )
-
     is_pdf_file = ".pdf" in file_name
     image_types = [".jpeg", ".jpg", ".heic", ".png"]
     is_image_file = any(image_type in file_name for image_type in image_types)
-    # is_image_file = file_name.contains(".jpeg") or file_name.contains(".jpg") or file_name.contains(".heic") or file_name.contains(".png")
     report = None
 
     template_message = """You are a nurse at a hospital, and are now dealing with patients 
@@ -37,21 +39,19 @@ def bio_summarize(file_name: str):
         template = template_message
     )
 
-    llm_chain = LLMChain(prompt = prompt_template, llm = llm)
-
     if is_pdf_file:
+        # TODO: PDF File Handling
         pass
     elif is_image_file:
         report = ocr.image_report(file_name)
         prompt = prompt_template.format(report_string = report)
-        report_summary = llm_chain.run(prompt)
-
-        return clean_formatter(report_summary)
+        report_summary = query_summarizer({"inputs":prompt, "parameters":parameters})
+        generated_text = report_summary[0]["generated_text"]
+        return clean_formatter(generated_text)
     else:
-        pass
+        raise TypeError("Not an accepted file type")
 
     return None
-
 
 def clean_formatter(report_summary):
   sentences = report_summary.split(".")

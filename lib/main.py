@@ -1,5 +1,5 @@
 import ocr
-import models
+import lib.bio_summarize as bio_summarize
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore")
 file_name = "medicalese/Sample Report.png"
 
 if __name__ == "__main__":
-    print(models.bio_summarize(file_name))
+    print(bio_summarize.bio_summarize(file_name))
 # Third-party imports
 # import openai
 # from fastapi import FastAPI, Form, Depends
