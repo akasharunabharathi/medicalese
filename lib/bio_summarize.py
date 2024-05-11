@@ -46,7 +46,8 @@ def bio_summarize(file_name: str):
         report = ocr.image_report(file_name)
         prompt = prompt_template.format(report_string = report)
         report_summary = query_summarizer({"inputs":prompt, "parameters":parameters})
-        generated_text = report_summary[0]["generated_text"]
+        # print(report_summary)
+        generated_text = report_summary[0]["summary_text"]
         return clean_formatter(generated_text)
     else:
         raise TypeError("Not an accepted file type")
@@ -60,7 +61,7 @@ def clean_formatter(report_summary):
   for sentence in sentences:
     sentence = sentence.strip()
     if sentence != "":
-      new_sentence = sentence[0].upper() + sentence[1:] + "."
+      new_sentence = sentence[0].upper() + sentence[1:] + ". "
       if sentence_count == 0:
         clean_report += new_sentence
       else:

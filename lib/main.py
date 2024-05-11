@@ -1,13 +1,15 @@
 import ocr
-import lib.bio_summarize as bio_summarize
+import bio_summarize as bio_summarize
+from explainer import explainer
 
 import warnings
 warnings.filterwarnings("ignore")
 
-file_name = "medicalese/Sample Report.png"
+file_name = "Sample Report.png"
 
 if __name__ == "__main__":
-    print(bio_summarize.bio_summarize(file_name))
+    report_summary = bio_summarize.bio_summarize(file_name)
+    print(explainer(report_summary))
 # Third-party imports
 # import openai
 # from fastapi import FastAPI, Form, Depends
