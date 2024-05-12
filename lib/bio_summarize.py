@@ -47,6 +47,7 @@ def bio_summarize(file_name: str):
         prompt = prompt_template.format(report_string = report)
         report_summary = query_summarizer({"inputs":prompt, "parameters":parameters})
         # print(report_summary)
+        generated_text = ""
         generated_text = report_summary[0]["summary_text"]
         return clean_formatter(generated_text)
     else:

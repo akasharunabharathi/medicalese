@@ -32,9 +32,9 @@ def explainer(text):
     )
 
     prompt = prompt_template.format(summary = text)
-    inputs = tokenizer(prompt)
+    inputs = tokenizer(prompt, return_tensors="pt")
     output_explanation = tokenizer.decode(
-        model.generate(inputs, **parameters)[0],
+        model.generate(inputs["input_ids"], **parameters)[0],
         skip_special_tokens = True
     )
     print(output_explanation)
