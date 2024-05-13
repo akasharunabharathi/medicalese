@@ -6,11 +6,10 @@ from PIL import Image
 # pytesseract.pytesseract.tesseract_cmd = r'usr/bin/tesseract'
 # Example tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract'
 
-def image_report(file_name: str):
+def image_report(image_file):
     """
     Takes an image as input, and returns text from the image as a string.
     """
-    image = Image.open(file_name)
-    result = pytesseract.image_to_string(image)
+    result = pytesseract.image_to_string(image_file)
 
     return result
