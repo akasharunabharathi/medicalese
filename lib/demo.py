@@ -12,9 +12,9 @@ def func_composition(image_file):
 
 gr_demo = gr.Interface(
     fn = func_composition,
-    inputs = gr.inputs.Image(type = "pil"),
+    inputs = "image",
     outputs = "text",
-    title = "Medicalese -> English"
+    title = "Medicalese -> English",
     description="Upload your report here"
 )
 
