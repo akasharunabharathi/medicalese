@@ -37,5 +37,5 @@ def explainer(text):
         model.generate(inputs["input_ids"], pad_token_id = tokenizer.eos_token_id, **parameters)[0],
         skip_special_tokens = True
     )
-    print(output_explanation)
+    # print(output_explanation)
     return output_explanation
