@@ -18,4 +18,4 @@ gr_demo = gr.Interface(
     description="Upload your report here"
 )
 
-gr_demo.launch()
+gr_demo.launch(share = True)
