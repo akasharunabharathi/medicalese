@@ -20,4 +20,5 @@ The Explainer Subsytem: Takes the input from the OCR-Summarization engine and si
 
 # Bug Fixes and Future Experiments
 • Requires error handling for model loading in `bio_summarize.py`.
+
 • Explore using Serverless Inference API for Llama-3 instead of loading it locally using the `Transformers` library.
