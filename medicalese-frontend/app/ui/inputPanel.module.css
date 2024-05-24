@@ -1,0 +1,51 @@
+.button {
+    padding: 20px;
+    background-color: orange;
+    color: whitesmoke;
+    border-radius: 15px;
+}
+
+.uploadArea {
+    width: 500px;
+    height: 600px;
+    border-radius: 15px;
+    /* border: 15px solid green; */
+    margin: 20px;
+    padding:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(50, 49, 49);
+}
+
+.button_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* opacity: 0; */
+}
+
+.elemSpace {
+    padding: 50px;
+}
+
+.fileInput {
+    /* width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1; */
+    cursor: pointer;
+    padding: 15px;
+    background-color: orange;
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.icon {
+    width: 50px;
+    height: 50px
+}
