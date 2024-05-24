@@ -6,7 +6,7 @@ from explainer import explainer
 
 def func_composition(image_file):
     summarized_report = bio_summarize(image_file) # accepts an image as an input
-    explained_report = explainer(summarized_report)
+    explained_report = explainer(summarized_report["summary"])
 
     return explained_report
 

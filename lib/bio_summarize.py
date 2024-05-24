@@ -5,6 +5,7 @@ import os
 import requests
 from decouple import config
 from langchain.prompts import PromptTemplate
+from time import sleep
 
 # custom modules
 import ocr
@@ -42,8 +43,15 @@ def bio_summarize(image_file):
       report_summary = query_summarizer({"inputs":prompt, "parameters":parameters})
       print(report_summary)
       generated_text = ""
+      
+      if ("error" in report_summary[0]):
+        load_eta = int(report_summary[0]["estimated_time"])
+        sleep(load_eta)
+        report_summary = query_summarizer({"inputs":prompt, "parameters":parameters})
+      
       generated_text = report_summary[0]["summary_text"]
-      return clean_formatter(generated_text)
+      
+      return jsonify({"report":report, "summary":clean_formatter(generated_text)})
     except:
       raise TypeError("Not an accepted file type")
 
