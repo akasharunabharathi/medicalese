@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medicalese-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: medicalese-backend
+  template:
+    metadata:
+      labels:
+        app: medicalese-backend
+    spec:
+      containers:
+      - name: medicalese-backend
+        image: 144722183414.dkr.ecr.us-east-1.amazonaws.com/medicalese-backend:latest
+        ports:
+        - containerPort: 80
