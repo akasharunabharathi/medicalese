@@ -1,4 +1,5 @@
 import ocr
+import os
 import bio_summarize as bio_summarize
 from fastapi import FastAPI, File, UploadFile
 
@@ -6,6 +7,10 @@ import warnings
 warnings.filterwarnings("ignore")
 
 app = FastAPI()
+
+app.get("/")
+async def home_page():
+    return {"info":"absolutely nothing to see here"}
 
 @app.post("/process_image")
 async def process_image(image_file: UploadFile):
@@ -17,4 +22,6 @@ async def process_image(image_file: UploadFile):
     return report_json
 
 if __name__ == "__main__":
-    os.system("uvicorn main:app --host 0.0.0.0 --port 80")
+    os.system('export PYTHONPATH="/workspaces/medicalese/lib:$PYTHONPATH"')
+    # os.system("fastapi run lib/main.py")
+    os.system("uvicorn lib.main:app --host 0.0.0.0 --port 80")
