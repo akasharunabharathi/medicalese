@@ -45,7 +45,7 @@ For the backend, I decided to deploy on Kubernetes with EC2 instances. To avoid 
   
   • `kubectl apply -f load_balancer.yaml` – copy the public url of the loadbalancer, this is what we'll `POST` to from the UI when a user clicks `Upload`
 
-Tada!!! You can find the code for the frontend and the backend on teh respective branches.
+Tada!!! You can find the code for the frontend and the backend on teh respective branches, and the `deployment.yaml` and `load_balancer.yaml` files as well on the backend branch.
 
 # Bug Fixes and Future Experiments
 • Requires error handling for model loading in `bio_summarize.py`.
