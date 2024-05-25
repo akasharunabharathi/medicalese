@@ -36,6 +36,8 @@ For the backend, I decided to deploy on Kubernetes with EC2 instances. To avoid 
   • `docker buildx inspect --bootstrap`
   
   • `docker buildx build --platform linux/amd64 -t <my-repo-url>/<my-image-name>:<tag> . --push` – in my case, my image name was `medicalese-backend` and the tag was `0.5.0` (it was the sicth image I'd cretaed, all images `latest`, `0.1.0` - `0.4.0` failed to deploy with `kubectl`, which I'll come to below)
+
+  • This now means we have x86-compatible images in our ECR repo, which we can use for deployment.
   
   • `eksctl create cluster` specify parameters as needed. I deployed on `t3.medium` EC2 instances in `us-east-1a` and `us-east-1b` (apparently some availability zones don't have EKS support, and you need to be running in at least two availaibilty zones that do offer support this)
   
