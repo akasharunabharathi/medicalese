@@ -26,14 +26,23 @@ So, for version 3, I decided to implement the UI and host the service myself ins
 For the backend, I decided to deploy on Kubernetes with EC2 instances. To avoid prohibitive costs for experimenting and an awful UX because of the load time, I didn't load in Llama-3 for the explainer module. Instead this was more of an exercise in mangaing all the resources required for an ML app demo myself from A-Z. These were the steps I followed:
 
 • Create a private repo in AWS ECR. You can use the CLI, I did it with the console.
+
 • `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <my-aws-repo-url>` – for authenticating your Docker client to push to your AWS ECR repo
+
 • I'm running my Docker Daemon on an M1 MacBook Air, which builds Docker images for an ARM architecture. However, EC2 instances use x86, so my images were initially incompatible with the systems I was trying to deploy my containers on. To resolve this:
+
   • `docker buildx creeate --name mybuilder --use`
+  
   • `docker buildx inspect --bootstrap`
+  
   • `docker buildx build --platform linux/amd64 -t <my-repo-url>/<my-image-name>:<tag> . --push` – in my case, my image name was `medicalese-backend` and the tag was `0.5.0` (it was the sicth image I'd cretaed, all images `latest`, `0.1.0` - `0.4.0` failed to deploy with `kubectl`, which I'll come to below)
+  
   • `eksctl create cluster` specify parameters as needed. I deployed on `t3.medium` EC2 instances in `us-east-1a` and `us-east-1b` (apparently some availability zones don't have EKS support, and you need to be running in at least two availaibilty zones that do offer support this)
+  
   • `kubectl apply -f deployment.yaml`
+  
   • `kubectl get pods` – check if your pods are alive
+  
   • `kubectl apply -f load_balancer.yaml` – copy the public url of the loadbalancer, this is what we'll `POST` to from the UI when a user clicks `Upload`
 
 Tada!!!
