@@ -6,7 +6,7 @@ export default function InputPanel() {
     const [image, setImage] = useState<File|null>(null);
     const [imageURL, setImageURL] = useState<string | null>(null);
     const [summary, setSummary] = useState<string | null>(null);
-    const apiURL = "ac52903aeda2d4b7f9c7f759692ec94f-292991886.us-east-1.elb.amazonaws.com";
+    const apiURL = "ac52903aeda2d4b7f9c7f759692ec94f-292991886.us-east-1.elb.amazonaws.com/process_image";
 
     const handleImageChange = (event:ChangeEvent<HTMLInputElement>) => {
         const fileDetails = event.target.files ? event.target.files[0] : null;
