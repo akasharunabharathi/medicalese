@@ -31,7 +31,7 @@ WORKDIR /app
 COPY ../ /app
 
 # Set the default command to run your application
-# CMD ["python3", "app.py"]
+CMD ["python3", "main.py"]
 
 # Expose the port the app runs on
-EXPOSE 5000 34000
+EXPOSE 80
