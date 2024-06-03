@@ -24,4 +24,4 @@ async def process_image(image_file: UploadFile):
 if __name__ == "__main__":
     os.system('export PYTHONPATH="/workspaces/medicalese/lib:$PYTHONPATH"')
     # os.system("fastapi run lib/main.py")
-    os.system("uvicorn lib.main:app --host 0.0.0.0 --port 80")
+    os.system("uvicorn main:app --host 0.0.0.0 --port 80")
