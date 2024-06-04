@@ -15,7 +15,7 @@ The Explainer Subsytem: Takes the input from the OCR-Summarization engine and si
 ## Example Report (Generated using ChatGPT)
 <img width="546" alt="Sample Report (1)" src="https://github.com/akasharunabharathi/medicalese/assets/90937878/85f685a4-0e24-4617-8974-6d29fadbbfa5">
 
-## Example Interpretation - From V1, V2 coming soon
+## Example Interpretation - From V1
 <img width="1363" alt="Screen Shot 2024-01-04 at 6 07 49 PM" src="https://github.com/akasharunabharathi/medicalese/assets/90937878/f500e225-3453-42b9-9369-2c567fb51831">
 
 # V3
